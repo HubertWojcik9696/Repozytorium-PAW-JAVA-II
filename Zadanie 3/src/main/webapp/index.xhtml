@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <h:form id="bla">
+        
+        
+            <h:outputLabel for="kwota" value="Kwota kredytu:" />
+            <h:inputText id="kwota" value="#{calcBB.kwota}" required="true" requiredMessage="Wartosc jest wymagana" validatorMessage="Wartosc musi zawierac sie w przedziale 100 - 5000000" >
+					<f:validateDoubleRange minimum="100" maximum="5000000" />
+					</h:inputText>
+            <h:outputLabel for="procent" value="Oprocentowanie w skali roku:" />
+            <h:inputText id="procent" value="#{calcBB.procent}" required="true" requiredMessage="Wartosc jest wymagana" validatorMessage="Wartosc musi zawierac sie w przedziale 1 - 15" >
+					<f:validateDoubleRange minimum="1" maximum="15" />
+					</h:inputText>
+            <h:outputLabel for="lata" value="Długość trwania kredytu (lata):" />
+            <h:inputText id="lata" value="#{calcBB.lata}" required="true" requiredMessage="Wartosc jest wymagana" validatorMessage="Wartosc musi zawierac sie w przedziale 1 - 10" >
+					<f:validateDoubleRange minimum="1" maximum="10" />
+					</h:inputText>
+					
+            <h:messages id="msg" />
+
+            <h:commandButton value="Oblicz ratę" action="#{calcBB.calc()}" styleClass="styled-button" style="padding: 15px; font-size: 18px; border-radius: 8px;" />
+
+            <h:commandButton value="Oblicz ratę (AJAX)" action="#{calcBB.calc_AJAX()}" styleClass="styled-button" style="padding: 15px; font-size: 18px; border-radius: 8px;">
+                <f:ajax execute="@form" render="msg" />
+            </h:commandButton>
+
+            <h:commandLink value="Informacje" action="#{calcBB.info()}" class="commandLink" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
