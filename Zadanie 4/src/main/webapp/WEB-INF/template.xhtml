@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>#{msg['template.title']}</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <div class="container">
+        <header>
+            <h1>#{msg['template.header']}</h1>
+        </header>
+        <main>
+            <ui:insert name="content" />
+        </main>
+        <footer>
+        <h:form>
+                <p:commandButton value="Polski" action="#{calcBB.setLocale('pl')}" update="@all" />
+                <p:commandButton value="English" action="#{calcBB.setLocale('en')}" update="@all" />
+            </h:form>
+            <p>#{msg['template.footer']}</p>
+        </footer>
+    </div>
+</h:body>
+</html>

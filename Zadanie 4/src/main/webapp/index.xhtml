@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <h:form id="bla">
+            <h:outputLabel for="kwota" value="#{msg['index.kwota_label']}" />
+            <h:inputText id="kwota" value="#{calcBB.kwota}" required="true" requiredMessage="#{msg['index.kwota_required']}" validatorMessage="#{msg['index.kwota_validator']}">
+                <f:validateDoubleRange minimum="100" maximum="5000000" />
+            </h:inputText>
+
+            <h:outputLabel for="procent" value="#{msg['index.procent_label']}" />
+            <h:inputText id="procent" value="#{calcBB.procent}" required="true" requiredMessage="#{msg['index.procent_required']}" validatorMessage="#{msg['index.procent_validator']}">
+                <f:validateDoubleRange minimum="1" maximum="15" />
+            </h:inputText>
+
+            <h:outputLabel for="lata" value="#{msg['index.lata_label']}" />
+            <h:inputText id="lata" value="#{calcBB.lata}" required="true" requiredMessage="#{msg['index.lata_required']}" validatorMessage="#{msg['index.lata_validator']}">
+                <f:validateDoubleRange minimum="1" maximum="10" />
+            </h:inputText>
+
+            <h:messages id="msg" />
+
+            <h:commandButton value="#{msg['index.calculate_button']}" action="#{calcBB.calc()}" styleClass="styled-button" style="padding: 15px; font-size: 18px; border-radius: 8px;" />
+
+            <h:commandButton value="#{msg['index.calculate_ajax_button']}" action="#{calcBB.calc_AJAX()}" styleClass="styled-button" style="padding: 15px; font-size: 18px; border-radius: 8px;">
+                <f:ajax execute="@form" render="msg" />
+            </h:commandButton>
+
+            <h:commandLink value="#{msg['index.info_link']}" action="#{calcBB.info()}" class="commandLink" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
