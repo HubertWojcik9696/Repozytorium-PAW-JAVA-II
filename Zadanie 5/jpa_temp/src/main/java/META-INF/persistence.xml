@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<persistence-unit name="jpa_temp">
+		<class>jsfcourse.entities.Cache</class>
+		<class>jsfcourse.entities.CacheLock</class>
+		<class>jsfcourse.entities.Car</class>
+		<class>jsfcourse.entities.FailedJob</class>
+		<class>jsfcourse.entities.JobBatch</class>
+		<class>jsfcourse.entities.Job</class>
+		<class>jsfcourse.entities.Message</class>
+		<class>jsfcourse.entities.Migration</class>
+		<class>jsfcourse.entities.PasswordResetToken</class>
+		<class>jsfcourse.entities.Reservation</class>
+		<class>jsfcourse.entities.Session</class>
+		<class>jsfcourse.entities.User</class>
+	</persistence-unit>
+</persistence>
