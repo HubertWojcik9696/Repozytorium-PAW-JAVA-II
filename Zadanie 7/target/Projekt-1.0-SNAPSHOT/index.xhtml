@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Wypożyczalnia samochodów</title>
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+</h:head>
+    
+<h:body>
+    <div class="header">
+        <h:link outcome="logowanie.xhtml">Zaloguj</h:link> |
+        <h:link outcome="rejestracja.xhtml">Zarejestruj</h:link>
+    </div>
+    <div class="main-title">
+        <h1>Wypożyczalnia</h1>
+    </div>
+    <div class="car-table">
+    <h:dataTable value="#{samochodBean.samochody}" var="samochod" border="1">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{samochod.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Marka</f:facet>
+            #{samochod.marka}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Model</f:facet>
+            #{samochod.model}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Rok</f:facet>
+            #{samochod.rok}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Cena dzienna</f:facet>
+            #{samochod.cenaNaDzien}
+        </h:column>
+        <!-- Nowa kolumna z przyciskiem -->
+        <h:column>
+            <f:facet name="header">Akcja</f:facet>
+            <h:commandButton value="Zarezerwuj" disabled="true"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+</h:body>
+</html>

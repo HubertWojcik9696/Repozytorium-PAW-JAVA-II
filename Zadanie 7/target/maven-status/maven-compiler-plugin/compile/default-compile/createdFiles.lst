@@ -1,0 +1,10 @@
+com\wypozyczalnia\service\UzytkownikService.class
+com\jsfcourse\beans\LogowanieBean.class
+com\jsfcourse\entities\Rezerwacja.class
+com\jsfcourse\entities\Uzytkownik.class
+com\jsfcourse\dao\RezerwacjaDAO.class
+com\jsfcourse\dao\SamochodDAO.class
+com\jsfcourse\beans\RejestracjaBean.class
+com\jsfcourse\beans\SamochodBean.class
+com\jsfcourse\entities\Samochod.class
+com\jsfcourse\dao\UzytkownikDAO.class
