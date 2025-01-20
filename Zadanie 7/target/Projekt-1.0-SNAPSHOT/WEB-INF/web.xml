@@ -17,8 +17,23 @@
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>FacesServlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.jsfcourse.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/userPanel.xhtml</url-pattern>
+        <url-pattern>/workerPanel.xhtml</url-pattern>
+        <url-pattern>/adminPanel.xhtml</url-pattern>
+    </filter-mapping>
+    <error-page>
+         <error-code>403</error-code>
+         <location>/error403.xhtml</location>
+    </error-page>
 </web-app>

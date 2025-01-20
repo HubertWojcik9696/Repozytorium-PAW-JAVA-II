@@ -1,3 +1,4 @@
+/* Ogólne ustawienia */
 * {
     margin: 0;
     padding: 0;
@@ -16,35 +17,49 @@ body {
     min-height: 100vh;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-    display: block;
+/* Pasek nawigacyjny */
+.navbar {
+    background-color: #007bff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end; /* Przyciski wyrównane do prawej */
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header a {
+.navbar-button {
+    margin-left: 10px; /* Odstępy między przyciskami */
+    color: white;
+    background-color: #0056b3;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
     text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    margin: 0 15px;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.header a:hover {
-    color: #0056b3;
+.navbar-button:hover {
+    background-color: #003f7f;
 }
 
+/* Główna część strony */
 .main-title {
     text-align: center;
-    margin: 40px 0;
-    width: 100%;
+    margin: 30px 0;
 }
 
 .main-title h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #333;
 }
 
+/* Formularze */
 .form-container {
     max-width: 400px;
     width: 100%;
@@ -92,12 +107,15 @@ input[type="submit"]:hover {
     text-decoration: underline;
 }
 
+/* Tabela samochodów */
 .car-table {
-    width: 100%;
-    max-width: 1000px;
     margin: 20px auto;
+    width: 90%;
+}
+
+.car-table p-dataTable {
+    width: 100%;
     border-collapse: collapse;
-    display: block;
 }
 
 .car-table th, .car-table td {
@@ -109,6 +127,7 @@ input[type="submit"]:hover {
 .car-table th {
     background-color: #007bff;
     color: white;
+    text-align: center;
 }
 
 .car-table tr:nth-child(even) {
@@ -131,4 +150,173 @@ input[type="submit"]:hover {
     .car-table {
         font-size: 0.9rem;
     }
+
+    .navbar {
+        justify-content: center; /* Przyciski na środku w mniejszych ekranach */
+    }
+}
+.navbar-welcome {
+    color: white;
+    font-size: 14px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+/* Stylizacja panelu użytkownika */
+.user-panel {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.user-panel h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #007bff;
+}
+
+/* Lista informacji o użytkowniku */
+.user-info {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 20px;
+}
+
+.user-info li {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.user-info strong {
+    color: #333;
+}
+
+/* Przycisk wylogowania */
+.logout-button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #d9363e;
+}
+
+/* Tabela rezerwacji */
+.p-datatable {
+    width: 100%;
+}
+
+.p-datatable th {
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+.p-datatable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.p-datatable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.p-datatable tr:hover {
+    background-color: #f1f1f1;
+}
+.role-button {
+    background-color: #28a745; /* Zielony kolor */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.role-button:hover {
+    background-color: #218838; /* Ciemniejszy zielony */
+}
+
+/* Styl wylogowania */
+.logout-button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #d9363e;
+}
+/* Panel pracownika i administratora */
+.worker-panel, .admin-panel {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.worker-panel h1, .admin-panel h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.p-datatable {
+    width: 100%;
+}
+
+.p-datatable th {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+.p-datatable td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.p-datatable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.p-datatable tr:hover {
+    background-color: #f1f1f1;
 }

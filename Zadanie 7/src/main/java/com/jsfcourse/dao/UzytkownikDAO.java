@@ -1,11 +1,13 @@
 package com.jsfcourse.dao;
 
 import com.jsfcourse.entities.Uzytkownik;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
+@ApplicationScoped
 public class UzytkownikDAO {
 
     @PersistenceContext
@@ -36,4 +38,14 @@ public class UzytkownikDAO {
     public List<Uzytkownik> findAll() {
         return em.createNamedQuery("Uzytkownik.findAll", Uzytkownik.class).getResultList();
     }
+    
+    public Uzytkownik findByNazwaUzytkownika(String nazwaUzytkownika) {
+    try {
+        return em.createNamedQuery("Uzytkownik.findByNazwaUzytkownika", Uzytkownik.class)
+                 .setParameter("nazwaUzytkownika", nazwaUzytkownika)
+                 .getSingleResult();
+    } catch (Exception e) {
+        return null;
+    }
+}
 }

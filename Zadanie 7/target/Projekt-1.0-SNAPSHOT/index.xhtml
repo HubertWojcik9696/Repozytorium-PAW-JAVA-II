@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="jakarta.faces.core">
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Wypożyczalnia samochodów</title>
-      <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </h:head>
-    
+
 <h:body>
-    <div class="header">
-        <h:link outcome="logowanie.xhtml">Zaloguj</h:link> |
-        <h:link outcome="rejestracja.xhtml">Zarejestruj</h:link>
-    </div>
+    <div class="navbar">
+    <h:form style="margin: 0; display: flex; align-items: center; justify-content: flex-end;">
+        <h:outputText value="Cześć, #{uzytkownikBean.zalogowanyUzytkownik.nazwaUzytkownika}" 
+                      rendered="#{uzytkownikBean.zalogowanyUzytkownik != null}" 
+                      styleClass="navbar-welcome" />
+        <p:commandButton value="Panel użytkownika" 
+                         rendered="#{uzytkownikBean.zalogowanyUzytkownik != null}" 
+                         action="userPanel.xhtml?faces-redirect=true" 
+                         ajax="false" 
+                         styleClass="navbar-button" />
+        <p:commandButton value="Wyloguj się" 
+                         rendered="#{uzytkownikBean.zalogowanyUzytkownik != null}" 
+                         action="#{uzytkownikBean.wyloguj}" 
+                         ajax="false" 
+                         styleClass="navbar-button" />
+        <p:commandButton value="Zaloguj się" 
+                         rendered="#{uzytkownikBean.zalogowanyUzytkownik == null}" 
+                         action="login.xhtml?faces-redirect=true" 
+                         ajax="false" 
+                         styleClass="navbar-button" />
+        <p:commandButton value="Zarejestruj się" 
+                         rendered="#{uzytkownikBean.zalogowanyUzytkownik == null}" 
+                         action="register.xhtml?faces-redirect=true" 
+                         ajax="false" 
+                         styleClass="navbar-button" />
+    </h:form>
+</div>
     <div class="main-title">
-        <h1>Wypożyczalnia</h1>
+        <h1>Wypożyczalnia Samochodów</h1>
     </div>
     <div class="car-table">
-    <h:dataTable value="#{samochodBean.samochody}" var="samochod" border="1">
-        <h:column>
-            <f:facet name="header">ID</f:facet>
-            #{samochod.id}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Marka</f:facet>
-            #{samochod.marka}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Model</f:facet>
-            #{samochod.model}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Rok</f:facet>
-            #{samochod.rok}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Cena dzienna</f:facet>
-            #{samochod.cenaNaDzien}
-        </h:column>
-        <!-- Nowa kolumna z przyciskiem -->
-        <h:column>
-            <f:facet name="header">Akcja</f:facet>
-            <h:commandButton value="Zarezerwuj" disabled="true"/>
-        </h:column>
-    </h:dataTable>
-</div>
-
+        <p:dataTable value="#{samochodBean.wszystkieSamochody}" var="samochod" paginator="true" rows="5" style="width: 100%;">
+            <p:column headerText="ID">
+                #{samochod.id}
+            </p:column>
+            <p:column headerText="Marka">
+                #{samochod.marka}
+            </p:column>
+            <p:column headerText="Model">
+                #{samochod.model}
+            </p:column>
+            <p:column headerText="Cena dzienna">
+                #{samochod.cenaNaDzien}
+            </p:column>
+            <p:column headerText="Akcja">
+                <p:commandButton value="Zarezerwuj" actionListener="#{rezerwacjaBean.zarezerwuj(samochod)}" />
+            </p:column>
+        </p:dataTable>
+    </div>
 </h:body>
 </html>

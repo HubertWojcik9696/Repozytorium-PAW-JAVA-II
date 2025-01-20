@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Rejestracja</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Rejestracja" style="max-width: 400px; margin: auto;">
+            <p:messages id="msgs" />
+            
+            <p:outputLabel for="imie" value="Imię" />
+            <p:inputText id="imie" value="#{uzytkownikBean.imie}" label="Imię" required="true" />
+
+            <p:outputLabel for="nazwisko" value="Nazwisko" />
+            <p:inputText id="nazwisko" value="#{uzytkownikBean.nazwisko}" label="Nazwisko" required="true" />
+
+            <p:outputLabel for="nazwaUzytkownika" value="Nazwa użytkownika" />
+            <p:inputText id="nazwaUzytkownika" value="#{uzytkownikBean.nazwaUzytkownika}" label="Nazwa użytkownika" required="true" />
+
+            <p:outputLabel for="email" value="E-mail" />
+            <p:inputText id="email" value="#{uzytkownikBean.email}" label="E-mail" required="true" />
+
+            <p:outputLabel for="haslo" value="Hasło" />
+            <p:password id="haslo" value="#{uzytkownikBean.haslo}" label="Hasło" required="true" />
+
+            <p:commandButton value="Zarejestruj" action="#{uzytkownikBean.rejestruj}" styleClass="p-mt-3" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

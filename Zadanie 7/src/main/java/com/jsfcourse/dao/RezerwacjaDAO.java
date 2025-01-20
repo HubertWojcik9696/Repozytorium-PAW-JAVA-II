@@ -1,6 +1,7 @@
 package com.jsfcourse.dao;
 
 import com.jsfcourse.entities.Rezerwacja;
+import com.jsfcourse.entities.Uzytkownik;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -12,8 +13,8 @@ public class RezerwacjaDAO {
     private EntityManager em;
 
     @Transactional
-    public void create(Rezerwacja Rezerwacja) {
-        em.persist(Rezerwacja);
+    public void create(Rezerwacja rezerwacja) {
+        em.persist(rezerwacja);
     }
 
     public Rezerwacja findById(Integer id) {
@@ -21,19 +22,29 @@ public class RezerwacjaDAO {
     }
 
     @Transactional
-    public void update(Rezerwacja Rezerwacja) {
-        em.merge(Rezerwacja);
+    public void update(Rezerwacja rezerwacja) {
+        em.merge(rezerwacja);
+    }
+
+    @Transactional
+    public void updateUzytkownik(Uzytkownik uzytkownik) {
+        em.merge(uzytkownik);
     }
 
     @Transactional
     public void delete(Integer id) {
-        Rezerwacja Rezerwacja = findById(id);
-        if (Rezerwacja != null) {
-            em.remove(Rezerwacja);
+        Rezerwacja rezerwacja = findById(id);
+        if (rezerwacja != null) {
+            em.remove(rezerwacja);
         }
     }
 
     public List<Rezerwacja> findAll() {
         return em.createNamedQuery("Rezerwacja.findAll", Rezerwacja.class).getResultList();
     }
+    public List<Rezerwacja> findByUserId(Integer userId) {
+    return em.createQuery("SELECT r FROM Rezerwacja r WHERE r.idUzytkownika.id = :userId", Rezerwacja.class)
+             .setParameter("userId", userId)
+             .getResultList();
+}
 }

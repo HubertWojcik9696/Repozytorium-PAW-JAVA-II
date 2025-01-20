@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Panel pracownika</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</h:head>
+<h:body>
+    <div class="worker-panel">
+        <h1>Panel pracownika</h1>
+        <h:form id="workerForm">
+            <p:panel header="Wszystkie rezerwacje" style="margin-bottom: 20px;">
+                <p:dataTable value="#{rezerwacjaBean.wszystkieRezerwacje}" var="rezerwacja" paginator="true" rows="10">
+                    <p:column headerText="ID">
+                        #{rezerwacja.id}
+                    </p:column>
+                    <p:column headerText="Status">
+                        <p:selectOneMenu value="#{rezerwacja.status}">
+                            <f:selectItem itemValue="oczekujacy" itemLabel="Oczekujący" />
+                            <f:selectItem itemValue="potwierdzony" itemLabel="Potwierdzony" />
+                            <f:selectItem itemValue="odrzucony" itemLabel="Odrzucony" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="Zapisz" 
+                                         actionListener="#{rezerwacjaBean.aktualizujStatus(rezerwacja)}"
+                                         update="@this" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+            <p:panel header="Zarządzanie pojazdami">
+                <p:dataTable value="#{samochodBean.wszystkieSamochody}" var="samochod" id="pojazdy">
+                    <p:column headerText="ID">
+                        #{samochod.id}
+                    </p:column>
+                    <p:column headerText="Marka">
+                        #{samochod.marka}
+                    </p:column>
+                    <p:column headerText="Model">
+                        #{samochod.model}
+                    </p:column>
+                    <p:column headerText="Rok">
+                        #{samochod.rok}
+                    </p:column>
+                    <p:column headerText="Cena na dzień">
+                        #{samochod.cenaNaDzien}
+                    </p:column>
+                    <p:column headerText="Akcja">
+                        <p:commandButton value="Usuń" action="#{samochodBean.usunSamochod(samochod.id)}" update="pojazdy" />
+                        <p:commandButton value="Edytuj" oncomplete="PF('editDialog').show()" 
+                                         actionListener="#{samochodBean.prepareForEdit(samochod)}" update="workerForm:editForm" />
+                    </p:column>
+                </p:dataTable>
+
+                <h3>Dodaj nowy pojazd</h3>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Marka:" />
+                    <p:inputText value="#{samochodBean.nowySamochod.marka}" />
+
+                    <h:outputLabel value="Model:" />
+                    <p:inputText value="#{samochodBean.nowySamochod.model}" />
+
+                    <h:outputLabel value="Rok:" />
+                    <p:inputText value="#{samochodBean.nowySamochod.rok}" />
+
+                    <h:outputLabel value="Cena na dzień:" />
+                    <p:inputText value="#{samochodBean.nowySamochod.cenaNaDzien}" />
+                </p:panelGrid>
+                <p:commandButton value="Dodaj pojazd" action="#{samochodBean.dodajSamochod}" update="pojazdy" />
+            </p:panel>
+        </h:form>
+
+        <p:dialog header="Edytuj pojazd" widgetVar="editDialog" modal="true" width="400px">
+            <h:form id="editForm">
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Marka:" />
+                    <p:inputText value="#{samochodBean.edytowanySamochod.marka}" />
+
+                    <h:outputLabel value="Model:" />
+                    <p:inputText value="#{samochodBean.edytowanySamochod.model}" />
+
+                    <h:outputLabel value="Rok:" />
+                    <p:inputText value="#{samochodBean.edytowanySamochod.rok}" />
+
+                    <h:outputLabel value="Cena na dzień:" />
+                    <p:inputText value="#{samochodBean.edytowanySamochod.cenaNaDzien}" />
+                </p:panelGrid>
+                <p:commandButton value="Zapisz zmiany" action="#{samochodBean.zapiszZmiany}" 
+                                 oncomplete="PF('editDialog').hide()" update="workerForm:pojazdy" />
+            </h:form>
+        </p:dialog>
+    </div>
+</h:body>
+</html>

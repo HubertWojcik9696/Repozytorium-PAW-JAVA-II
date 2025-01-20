@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</h:head>
+
+<h:body>
+    <div class="user-panel">
+        <h1>Panel użytkownika</h1>
+        <h:form>
+            <p:panel header="Witaj, #{uzytkownikBean.zalogowanyUzytkownik.imie} #{uzytkownikBean.zalogowanyUzytkownik.nazwisko}" style="margin-bottom: 20px;">
+                <h:outputText value="Twoje dane:" styleClass="section-title" />
+
+                <ul class="user-info">
+                    <li><strong>Imię:</strong> #{uzytkownikBean.zalogowanyUzytkownik.imie}</li>
+                    <li><strong>Nazwisko:</strong> #{uzytkownikBean.zalogowanyUzytkownik.nazwisko}</li>
+                    <li><strong>Nazwa użytkownika:</strong> #{uzytkownikBean.zalogowanyUzytkownik.nazwaUzytkownika}</li>
+                    <li><strong>Email:</strong> #{uzytkownikBean.zalogowanyUzytkownik.email}</li>
+                    <li><strong>Rola:</strong> #{uzytkownikBean.zalogowanyUzytkownik.rola}</li>
+                </ul>
+            </p:panel>
+
+            <p:panel header="Nawigacja" style="margin-bottom: 20px;">
+                <h:panelGroup>
+                    <p:commandButton value="Panel pracownika" 
+                                     rendered="#{uzytkownikBean.zalogowanyUzytkownik.rola == 'pracownik' or uzytkownikBean.zalogowanyUzytkownik.rola == 'administrator'}" 
+                                     action="workerPanel.xhtml?faces-redirect=true" 
+                                     ajax="false" 
+                                     styleClass="role-button" />
+
+                    <p:commandButton value="Panel admina" 
+                                     rendered="#{uzytkownikBean.zalogowanyUzytkownik.rola == 'administrator'}" 
+                                     action="adminPanel.xhtml?faces-redirect=true" 
+                                     ajax="false" 
+                                     styleClass="role-button" />
+                </h:panelGroup>
+            </p:panel>
+
+            <p:panel header="Twoje rezerwacje" style="margin-bottom: 20px;">
+    <p:dataTable value="#{rezerwacjaBean.rezerwacjeUzytkownika}" var="rezerwacja" paginator="true" rows="5" style="width: 100%;">
+        <p:column headerText="ID">
+            #{rezerwacja.id}
+        </p:column>
+        <p:column headerText="Samochód">
+            #{rezerwacja.idSamochodu.marka} #{rezerwacja.idSamochodu.model}
+        </p:column>
+        <p:column headerText="Data rozpoczęcia">
+            #{rezerwacja.dataRozpoczecia}
+        </p:column>
+        <p:column headerText="Data zakończenia">
+            #{rezerwacja.dataZakonczenia}
+        </p:column>
+        <p:column headerText="Status">
+            #{rezerwacja.status}
+        </p:column>
+    </p:dataTable>
+</p:panel>
+
+            <p:commandButton value="Wyloguj się" action="#{uzytkownikBean.wyloguj}" styleClass="logout-button" />
+        </h:form>
+    </div>
+</h:body>
+</html>

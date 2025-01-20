@@ -12,8 +12,8 @@ public class SamochodDAO {
     private EntityManager em;
 
     @Transactional
-    public void create(Samochod Samochod) {
-        em.persist(Samochod);
+    public void create(Samochod samochod) {
+        em.persist(samochod);
     }
 
     public Samochod findById(Integer id) {
@@ -21,19 +21,40 @@ public class SamochodDAO {
     }
 
     @Transactional
-    public void update(Samochod Samochod) {
-        em.merge(Samochod);
+    public void update(Samochod samochod) {
+        em.merge(samochod);
     }
 
     @Transactional
     public void delete(Integer id) {
-        Samochod Samochod = findById(id);
-        if (Samochod != null) {
-            em.remove(Samochod);
+        Samochod samochod = findById(id);
+        if (samochod != null) {
+            em.remove(samochod);
         }
+    }
+
+    @Transactional
+    public void delete(Samochod samochod) {
+        if (samochod != null && !em.contains(samochod)) {
+            samochod = em.merge(samochod);
+        }
+        em.remove(samochod);
     }
 
     public List<Samochod> findAll() {
         return em.createNamedQuery("Samochod.findAll", Samochod.class).getResultList();
+    }
+
+    public List<Samochod> findByMarka(String marka) {
+        return em.createQuery("SELECT s FROM Samochod s WHERE s.marka = :marka", Samochod.class)
+                 .setParameter("marka", marka)
+                 .getResultList();
+    }
+
+    public List<Samochod> findByPriceRange(Double minPrice, Double maxPrice) {
+        return em.createQuery("SELECT s FROM Samochod s WHERE s.cenaNaDzien BETWEEN :minPrice AND :maxPrice", Samochod.class)
+                 .setParameter("minPrice", minPrice)
+                 .setParameter("maxPrice", maxPrice)
+                 .getResultList();
     }
 }
